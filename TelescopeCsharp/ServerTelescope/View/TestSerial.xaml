@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ServerTelescope.View.TestSerial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:properties="clr-namespace:ServerTelescope.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500" >
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Margin="20,0" HorizontalAlignment="Left" Grid.Row="0"  Width="216" Content="{x:Static properties:Resources.SelectSerialPort}" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="20,5">
+            <ComboBox  Width="180" ItemsSource="{Binding ComSource}" SelectedItem="{Binding ComSelected,Mode=TwoWay}"/>
+            <Button Margin="20,0"  Command="{Binding SendRefresh}" HorizontalAlignment="Left" Height="25" Width="75" Content="{x:Static properties:Resources.Refresh}"/>
+        </StackPanel>
+
+        <Label Margin="20,0" HorizontalAlignment="Left" Grid.Row="2"  Width="216" Content="{x:Static properties:Resources.Test}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Margin="20,5">
+            <TextBox  Height="31"  TextWrapping="Wrap" Text="{Binding TextSend,Mode=TwoWay}"  VerticalAlignment="Top" Width="180"/>
+            <Button Content="{x:Static properties:Resources.Send}"  Command="{Binding SendCommand}" Height="31"  Margin="20,0" VerticalAlignment="Top" Width="74"/>
+        </StackPanel>
+        <Label Content="{x:Static properties:Resources.Listener}" HorizontalAlignment="Left"  Height="33" Margin="20,0" Grid.Row="4" VerticalAlignment="Top" Width="216"/>
+        <ListBox Grid.Row="5" ItemsSource="{Binding RecieveDatas}" Height="50" Margin="20,0" Width="300" HorizontalAlignment="Left" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>                 
+                        <TextBlock Text="{Binding}"/>                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Content="{x:Static properties:Resources.Save}"  HorizontalAlignment="Left" Command="{Binding SendCommand}" Height="31"  Margin="245,20,0,20" Grid.Row="6" Width="74"/>
+
+    </Grid>
+</UserControl>

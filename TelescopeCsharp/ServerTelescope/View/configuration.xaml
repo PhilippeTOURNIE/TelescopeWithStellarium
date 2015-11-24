@@ -1,0 +1,47 @@
+﻿<UserControl xmlns:View="clr-namespace:ServerTelescope.View"  x:Class="ServerTelescope.View.configuration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:properties="clr-namespace:ServerTelescope.Properties"
+             xmlns:vm="clr-namespace:ServerTelescope.ViewModel"
+             mc:Ignorable="d" 
+             
+             d:DesignHeight="602" d:DesignWidth="700" >
+    <UserControl.Resources>
+        <vm:InitPluginViewModel x:Key="InitPluginViewModel" />
+        <vm:CoordonneesViewModel x:Key="CoordonneesViewModel" />
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Margin="20,10" Grid.Row="0" Grid.Column="0"  Text="{x:Static properties:Resources.ConfigTitle}" />
+
+        <TextBlock Margin="20,0"  Grid.Row="1"  Grid.Column="0"    TextWrapping="Wrap" Text="{x:Static properties:Resources.ConfigPortNumber}" />
+        <TextBox   Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Left"  Text="{Binding IdPort,Mode=TwoWay,ValidatesOnDataErrors=True}"  VerticalAlignment="Top" Width="100"/>
+
+        <TextBlock Margin="20,10" Grid.Row="2" Grid.Column="0"  Text="{x:Static properties:Resources.ConfigTitle2}" />
+        <TextBlock Margin="20,0" Grid.Row="3"  Grid.Column="0"   TextWrapping="Wrap" Text="{x:Static properties:Resources.ConfigPortSerie}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="3"  Grid.Column="1"  >
+            <ComboBox  Width="180" ItemsSource="{Binding ComSource}" SelectedItem="{Binding ComSelected,Mode=TwoWay}"/>
+            <Button Margin="20,0"  Command="{Binding SendRefresh}" HorizontalAlignment="Left"  Width="75" Content="{x:Static properties:Resources.Refresh}"/>
+        </StackPanel>
+        <Button Grid.Row="4" Width="200" Content="{x:Static properties:Resources.ConfigSave}"  Command="{Binding SaveCommand}"   />
+
+        <View:InitPlugInServer DataContext="{StaticResource InitPluginViewModel}" HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="2" Margin="20" />
+        <View:Coordonnees DataContext="{StaticResource CoordonneesViewModel}" HorizontalAlignment="Left" Grid.Row="6"  Grid.ColumnSpan="2" Margin="20" />
+    </Grid>
+</UserControl>
